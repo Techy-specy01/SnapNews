@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+{% block title %}SnapNews — Today's News, Simplified{% endblock %}
+
+{% block content %}
+
+  <!-- ═══════════  HERO SECTION  ═══════════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">⚡ AI-Powered News Summaries</div>
+      <h1 class="hero-title">
+        News that doesn't<br />
+        <span class="hero-highlight">waste your time.</span>
+      </h1>
+      <p class="hero-sub">
+        Real news. Simple words. 10 seconds to understand anything.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════  CATEGORY SECTIONS  ═══════════ -->
+  {% for category, articles in all_news.items() %}
+    {% if articles %}
+      <section class="category-section">
+
+        <!-- Section header -->
+        <div class="section-header">
+          <div class="section-title-row">
+            <span class="section-emoji">{{ category_meta[category]['emoji'] }}</span>
+            <h2 class="section-title">{{ category_meta[category]['label'] }}</h2>
+            <span class="section-count">{{ articles|length }} stories</span>
+          </div>
+          <a href="/category/{{ category }}" class="see-all-link">
+            See all {{ category_meta[category]['label'] }} news →
+          </a>
+        </div>
+
+        <!-- News cards grid -->
+        <div class="cards-grid">
+          {% for article in articles %}
+            <div class="news-card" data-category="{{ category }}">
+
+              <!-- Top: category badge -->
+              <div class="card-top">
+                <span class="category-badge" style="background: {{ category_meta[category]['color'] }}22; color: {{ category_meta[category]['color'] }}; border-color: {{ category_meta[category]['color'] }}44;">
+                  {{ category_meta[category]['emoji'] }} {{ category_meta[category]['label'] }}
+                </span>
+                <span class="card-source">{{ article.source }}</span>
+              </div>
+
+              <!-- Headline -->
+              <h3 class="card-title">{{ article.title }}</h3>
+
+              <!-- AI Summary -->
+              <p class="card-summary">
+                {% if article.summary %}
+                  {{ article.summary }}
+                {% else %}
+                  {{ article.description[:180] }}...
+                {% endif %}
+              </p>
+
+              <!-- Footer: read more link -->
+              <div class="card-footer">
+                <a href="{{ article.url }}" target="_blank" rel="noopener" class="read-more-btn">
+                  Read full story ↗
+                </a>
+                <span class="ai-badge">✨ AI Summary</span>
+              </div>
+
+            </div>
+          {% endfor %}
+        </div>
+
+      </section>
+    {% endif %}
+  {% endfor %}
+
+{% endblock %}

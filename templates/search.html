@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+{% block title %}Search: {{ query }} — SnapNews{% endblock %}
+
+{% block content %}
+
+  <!-- ═══════════  SEARCH HEADER  ═══════════ -->
+  <section class="search-hero">
+    {% if query %}
+      <div class="search-hero-inner">
+        <div class="search-hero-label">Search results for</div>
+        <h1 class="search-hero-query">"{{ query }}"</h1>
+        <p class="search-hero-count">
+          {% if articles %}
+            Found <strong>{{ articles|length }}</strong> articles — all summarized by AI ✨
+          {% else %}
+            No results found. Try a different keyword!
+          {% endif %}
+        </p>
+      </div>
+    {% else %}
+      <div class="search-hero-inner">
+        <h1 class="cat-hero-title">Search News 🔍</h1>
+        <p class="cat-hero-sub">Type a topic in the search bar above to get started.</p>
+      </div>
+    {% endif %}
+  </section>
+
+  <!-- ═══════════  RESULTS GRID  ═══════════ -->
+  {% if articles %}
+    <div class="cards-grid cards-grid--large">
+      {% for article in articles %}
+        <div class="news-card">
+
+          <div class="card-top">
+            <span class="category-badge search-badge">
+              🔍 Search Result
+            </span>
+            <span class="card-source">{{ article.source }}</span>
+          </div>
+
+          <h3 class="card-title">{{ article.title }}</h3>
+
+          <p class="card-summary">
+            {% if article.summary %}
+              {{ article.summary }}
+            {% else %}
+              {{ article.description[:200] }}...
+            {% endif %}
+          </p>
+
+          <div class="card-footer">
+            <a href="{{ article.url }}" target="_blank" rel="noopener" class="read-more-btn">
+              Read full story ↗
+            </a>
+            <span class="ai-badge">✨ AI Summary</span>
+          </div>
+
+        </div>
+      {% endfor %}
+    </div>
+
+  {% elif query %}
+    <!-- No results state -->
+    <div class="empty-state">
+      <div class="empty-emoji">🤔</div>
+      <h2>Nothing found for "{{ query }}"</h2>
+      <p>Try searching for something else, like "AI", "climate", or "football".</p>
+      <a href="/" class="read-more-btn">← Back to Home</a>
+    </div>
+  {% endif %}
+
+{% endblock %}

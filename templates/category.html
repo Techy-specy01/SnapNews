@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+{% block title %}{{ meta.emoji }} {{ meta.label }} News — SnapNews{% endblock %}
+
+{% block content %}
+
+  <!-- ═══════════  CATEGORY HERO  ═══════════ -->
+  <section class="cat-hero" style="border-color: rgba({{ meta.color }}, 0.2);">
+    <div class="cat-hero-inner">
+      <div class="cat-emoji-big">{{ meta.emoji }}</div>
+      <div>
+        <div class="cat-hero-label">Category</div>
+        <h1 class="cat-hero-title" style="color: {{ meta.color }};">
+          {{ meta.label }} News
+        </h1>
+        <p class="cat-hero-sub">
+          {{ articles|length }} latest stories, summarized by AI for you.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════  OTHER CATEGORIES  ═══════════ -->
+  <div class="other-cats">
+    {% for cat in categories %}
+      {% if cat != current_category %}
+        <a href="/category/{{ cat }}" class="other-cat-pill">
+          {{ category_meta[cat]['emoji'] }} {{ category_meta[cat]['label'] }}
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <!-- ═══════════  ARTICLES GRID  ═══════════ -->
+  {% if articles %}
+    <div class="cards-grid cards-grid--large">
+      {% for article in articles %}
+        <div class="news-card news-card--featured" data-category="{{ current_category }}">
+
+          <div class="card-top">
+            <span class="category-badge" style="background: {{ meta.color }}22; color: {{ meta.color }}; border-color: {{ meta.color }}44;">
+              {{ meta.emoji }} {{ meta.label }}
+            </span>
+            <span class="card-source">{{ article.source }}</span>
+          </div>
+
+          <h3 class="card-title">{{ article.title }}</h3>
+
+          <p class="card-summary">
+            {% if article.summary %}
+              {{ article.summary }}
+            {% else %}
+              {{ article.description[:200] }}...
+            {% endif %}
+          </p>
+
+          <div class="card-footer">
+            <a href="{{ article.url }}" target="_blank" rel="noopener" class="read-more-btn">
+              Read full story ↗
+            </a>
+            <span class="ai-badge">✨ AI Summary</span>
+          </div>
+
+        </div>
+      {% endfor %}
+    </div>
+
+  {% else %}
+    <!-- Empty state -->
+    <div class="empty-state">
+      <div class="empty-emoji">😕</div>
+      <h2>No articles found</h2>
+      <p>Couldn't load {{ meta.label }} news right now. Try again in a moment!</p>
+      <a href="/" class="read-more-btn">← Back to Home</a>
+    </div>
+  {% endif %}
+
+{% endblock %}
