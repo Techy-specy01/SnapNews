@@ -1,4 +1,6 @@
 # SnapNews
+<img width="1413" height="786" alt="SnapNews1" src="https://github.com/user-attachments/assets/772bc8c2-b3cf-43c7-807b-ef3fd3920294" />
+
 SnapNews is an AI-powered news summarizer built for Gen-Z and busy people who don't have time to read long articles. It fetches real breaking news, runs it through Google Gemini AI, and delivers bite-sized summaries in plain English — displayed in a clean, dark-themed flash-card interface.
 
  Features
@@ -12,7 +14,8 @@ SnapNews is an AI-powered news summarizer built for Gen-Z and busy people who do
 ⌨️ Keyboard shortcut — Press / to instantly focus the search bar
 
 
-🛠️ Tech Stack
+🛠️ Tech Stack<img width="863" height="756" alt="SnapNews2" src="https://github.com/user-attachments/assets/7a96bd26-a790-4664-a840-531812971a7e" />
+
 LayerToolBackendPython + FlaskFrontendHTML + CSS + JavaScriptAIGoogle Gemini 1.5 Flash APINews DataNewsAPI.orgStylingCustom CSS (Yellow + Green)
 
 📁 Project Structure
