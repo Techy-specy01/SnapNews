@@ -72,7 +72,7 @@ def category_page(category_name):
 
 
 # ════════════════════════════════════════════════════════════════
-#  SEARCH  –  /search?q=your+query
+#  SEARCH  – 
 #  Called by the search bar
 # ════════════════════════════════════════════════════════════════
 @app.route("/search")

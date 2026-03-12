@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
+
 load_dotenv()
 
 # --- API Keys ---
@@ -19,7 +19,7 @@ CATEGORIES = {
     "entertainment": "entertainment",
 }
 
-# Category display labels and emoji icons
+
 CATEGORY_META = {
     "technology":    {"label": "Tech",          "emoji": "💻", "color": "#4ade80"},
     "business":      {"label": "Business",      "emoji": "📈", "color": "#facc15"},
